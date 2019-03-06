@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import Todo from "./components/Todo";
 
 class App extends Component {
   state = {
@@ -33,6 +34,9 @@ class App extends Component {
             onChange={this.handleChange}
           />
         </form>
+        {this.state.todolist.map(task => {
+          return <Todo task={task} />;
+        })}
       </div>
     );
   }
