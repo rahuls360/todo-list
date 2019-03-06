@@ -12,7 +12,9 @@ class App extends Component {
 
   handleSubmit = event => {
     if (this.state.input !== "") {
-      console.log(this.state.input);
+      const todolist = this.state.todolist;
+      todolist.push(this.state.input);
+      this.setState({ todolist: todolist });
     } else {
       console.log("Please enter an item");
     }

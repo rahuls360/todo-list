@@ -5,3 +5,4 @@ Build a traditional todo list application-> Add tasks, Edit tasks, Delete tasks.
 ## Good to have features
 
 1. Use SCSS
+2. Drag and reorder list
