@@ -1,0 +1,9 @@
+.mt-5 {
+  margin-top: 5em;
+}
+
+form input {
+  width: 50% !important;
+  display: block;
+  margin: auto;
+}
