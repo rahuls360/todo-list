@@ -30,8 +30,10 @@ class App extends Component {
     event.preventDefault();
   };
 
-  editTask = (key) => {
-    console.log("Edit", key);
+  editTask = (key, task) => {
+    const todolist = this.state.todolist;
+    todolist[key] = task;
+    this.setState({todolist: todolist});
   }
 
   deleteTask = (key) => {
