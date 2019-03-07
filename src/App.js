@@ -30,6 +30,17 @@ class App extends Component {
     event.preventDefault();
   };
 
+  editTask = (key) => {
+    console.log("Edit", key);
+  }
+
+  deleteTask = (key) => {
+    console.log("Delete", key);
+    const todolist = this.state.todolist;
+    todolist.splice(key, 1)
+    this.setState({todolist: todolist});
+  }
+
   render() {
     return (
       <section id="todo" className="mt-5">
@@ -44,8 +55,8 @@ class App extends Component {
                 className="form-control"
               />
             </form>
-            {this.state.todolist.map(task => {
-              return <Todo task={task} />;
+            {this.state.todolist.map((task,index) => {
+              return <Todo task={task} key={index} index={index} editTask={this.editTask} deleteTask={this.deleteTask}/>;
             })}
           </div>
         </div>
