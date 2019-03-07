@@ -9,7 +9,7 @@ class Todo extends React.Component {
         </div>
         <div className="right">
           <button>Edit</button>
-          <button>X</button>
+          <button style={{backgroundColor: "#e74c3c", marginLeft: '5px'}}>X</button>
         </div>
       </div>
     );
