@@ -27,7 +27,7 @@ class Todo extends React.Component {
   render() {
     let edit = <p>{this.state.task}</p>;
     if(this.state.editFlag){
-      edit = <form onSubmit={this.handleSubmit}>
+      edit = <form onSubmit={this.handleSubmit} className="form-edit">
         <input type="text" value={this.state.task} onChange={this.handleEditChange}/>
       </form>;
     }
