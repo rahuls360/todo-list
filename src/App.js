@@ -14,6 +14,18 @@ class App extends Component {
     todolist: []
   };
 
+  componentDidMount(){
+    if(localStorage.todolist){
+      let todolist = JSON.parse(localStorage.todolist);
+      console.log(todolist);
+      this.setState({todolist: todolist});
+    }
+  }
+
+  componentDidUpdate(prevProps, prevState){
+    localStorage.todolist = JSON.stringify(this.state.todolist);
+}
+
   handleChange = event => {
     this.setState({ input: event.target.value });
   };
