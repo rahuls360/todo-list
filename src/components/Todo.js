@@ -7,7 +7,7 @@ class Todo extends React.Component {
   }
 
   handleEdit= () => {
-  this.setState({editFlag: true});
+  this.setState({editFlag: !this.state.editFlag});
   }
 
   handleDelete = () => {
@@ -28,7 +28,7 @@ class Todo extends React.Component {
     let edit = <p>{this.state.task}</p>;
     if(this.state.editFlag){
       edit = <form onSubmit={this.handleSubmit} className="form-edit">
-        <input type="text" value={this.state.task} onChange={this.handleEditChange}/>
+        <input type="text" value={this.state.task} onChange={this.handleEditChange} autoFocus/>
       </form>;
     }
     return (
