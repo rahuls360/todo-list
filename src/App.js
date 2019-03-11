@@ -11,20 +11,22 @@ if (typeof window !== "undefined") {
 class App extends Component {
   state = {
     input: "",
-    todolist: []
+    todolist: [],
+    status: []
   };
 
-  componentDidMount(){
-    if(localStorage.todolist){
+  componentDidMount() {
+    if (localStorage.todolist && localStorage.status) {
       let todolist = JSON.parse(localStorage.todolist);
-      console.log(todolist);
-      this.setState({todolist: todolist});
+      let status = JSON.parse(localStorage.status);
+      this.setState({ todolist: todolist, status: status });
     }
   }
 
-  componentDidUpdate(prevProps, prevState){
+  componentDidUpdate(prevProps, prevState) {
     localStorage.todolist = JSON.stringify(this.state.todolist);
-}
+    localStorage.status = JSON.stringify(this.state.status);
+  }
 
   handleChange = event => {
     this.setState({ input: event.target.value });
@@ -33,8 +35,10 @@ class App extends Component {
   handleSubmit = event => {
     if (this.state.input !== "") {
       const todolist = this.state.todolist;
+      const status = this.state.status;
       todolist.push(this.state.input);
-      this.setState({ todolist: todolist });
+      status.push(false);
+      this.setState({ todolist: todolist, status: status });
     } else {
       console.log("Please enter an item");
     }
@@ -45,15 +49,21 @@ class App extends Component {
   editTask = (key, task) => {
     const todolist = this.state.todolist;
     todolist[key] = task;
-    this.setState({todolist: todolist});
-  }
+    this.setState({ todolist: todolist });
+  };
 
-  deleteTask = (key) => {
+  deleteTask = key => {
     console.log("Delete", key);
     const todolist = this.state.todolist;
-    todolist.splice(key, 1)
-    this.setState({todolist: todolist});
-  }
+    todolist.splice(key, 1);
+    this.setState({ todolist: todolist });
+  };
+
+  toggleTaskStatus = key => {
+    const status = this.state.status;
+    status[key] = !status[key];
+    this.setState({ status: status });
+  };
 
   render() {
     return (
@@ -69,8 +79,18 @@ class App extends Component {
                 className="form-control"
               />
             </form>
-            {this.state.todolist.map((task,index) => {
-              return <Todo task={task} key={index} index={index} editTask={this.editTask} deleteTask={this.deleteTask}/>;
+            {this.state.todolist.map((task, index) => {
+              return (
+                <Todo
+                  task={task}
+                  key={index}
+                  index={index}
+                  editTask={this.editTask}
+                  deleteTask={this.deleteTask}
+                  status={this.state.status[index]}
+                  toggleTaskStatus={this.toggleTaskStatus}
+                />
+              );
             })}
           </div>
         </div>

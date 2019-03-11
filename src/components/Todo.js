@@ -3,8 +3,7 @@ import React from "react";
 class Todo extends React.Component {
   state = {
     editFlag: false,
-    task: this.props.task,
-    status: false
+    task: this.props.task
   };
 
   handleEdit = () => {
@@ -26,7 +25,7 @@ class Todo extends React.Component {
   };
 
   handleClick = event => {
-    this.setState({ status: !this.state.status });
+    this.props.toggleTaskStatus(this.props.index);
   };
 
   render() {
@@ -46,7 +45,7 @@ class Todo extends React.Component {
     return (
       <div className="d-flex">
         <div
-          className={this.state.status ? "left done" : "left"}
+          className={this.props.status ? "left done" : "left"}
           onClick={this.handleClick}
         >
           {edit}
